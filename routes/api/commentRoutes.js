@@ -10,7 +10,7 @@ const ac = require('../../roles')
 ///////Routes to get all comments for a specific post and to create a new comment are in the postRoutes.js file
 
 //get all comments: this probably only needs to be available to mod and admin: no one else just needs a list of all the comments
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.findAll({
         include: [User, Post],
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 //get comment by ID: any paid user can get/read their own comment (by the foreign key > userId). WOuld this be used to render comment into edit form?
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.findByPk(req.params.id, {
             where: {userId: req.session.userId},

@@ -8,7 +8,7 @@ const withAuth = require('../../utils/auth')
 const ac = require('../../roles')
 
 //get all posts: these will be rendered on the forum page (filtered by topic?) All users can read all posts
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).readAny('post');
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
   });
 
 //get post by id: these will render on the individual post cards if the user clicks on a forum card. The user will write comments on the individual post card. All users can read a post by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
         include: [User, Comment],
@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //get all comments for a particular post: this probably only needs to be available to mod and admin: no one else just needs a list of all the comments
-router.get('/:postId/comments', async (req, res) => {
+router.get('/:postId/comments', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.findAll({
             where: {postId: req.params.postId},

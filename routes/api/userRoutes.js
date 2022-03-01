@@ -9,7 +9,7 @@ const withAuth = require('../../utils/auth')
 // const ac = require('../../roles')
 
 //get all users (admin role only)
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         // const role = req.session.role
         // const permission = ac.can(role).readAny('user');
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 //get user by id (anyone can get their own user, only admin can ger ANY user)
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     try {
         // const role = req.session.role
         // const permission = ac.can(role).readAny('user');
