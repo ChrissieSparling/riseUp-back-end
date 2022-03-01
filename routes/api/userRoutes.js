@@ -63,6 +63,15 @@ router.get('/:id', async (req, res) => {
 
 //create new user: anyone can create a new user object for themselves, only admin should have the ability to create a user and assign them a specific role (like mod)
 router.post('/new', async (req, res) => {
+    //need:
+    //firstName:
+    //lastName:
+    //username:
+    //password:
+    //role: >> in final app, we will assign this to the based on their status
+    //email:
+    //birthday:
+    //zipCode:
     try {
         const newUser = await User.create({...req.body});
 

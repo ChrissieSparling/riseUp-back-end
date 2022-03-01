@@ -7,6 +7,8 @@ const withAuth = require('../../utils/auth')
 
 const ac = require('../../roles')
 
+///////Routes to get all comments for a specific post and to create a new comment are in the postRoutes.js file
+
 //get all comments: this probably only needs to be available to mod and admin: no one else just needs a list of all the comments
 router.get('/', async (req, res) => {
     try {

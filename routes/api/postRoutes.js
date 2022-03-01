@@ -84,7 +84,8 @@ router.post('/new', withAuth, async (req, res) => {
 //post comment: any paid user and greater can post/create a new comment on any post. Used on the individual post cards.
 router.post('/:postId/comments/new', withAuth, async (req, res)=>{
     //need:
-    //body
+    //body:
+    //postId: >> in production, this will be grabbed from the post object on the same card
     const body = req.body;
     try {
         const newComment = await Comment.create({ ...body, userId: req.session.userId, postId: req.params.postId });
