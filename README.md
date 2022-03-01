@@ -1,8 +1,7 @@
 # riseUp-back-end
 This the RISEUP back end- we be twerking back here...
 
-
-##A Note About the Routes: 
+## A Note About the Routes: 
 - They are currently set up to avoid using '/api/' as part of the url. If we want to add this back in, we will just need to remove it from the server.js file definition of "routes" on line 10 >> `const routes = require('./routes/api')` and add an idex file pointing to the api route in the routes folder.
 - I have tried to leave comments on each route about what it does, and who should have access to it in production.
 - For all routes that are post routes, I have tried to include what you would need to put into the `req.body` to complete the request successfully as comments inside the route itself
