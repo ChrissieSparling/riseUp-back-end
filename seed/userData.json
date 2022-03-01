@@ -1,0 +1,26 @@
+[
+{
+    "role":"admin",
+    "username":"AdminOne",
+    "password":"AdminOne",
+    "email": "admin@email.com",
+    "birthday":"01-02-2000",
+    "zipCode":"98765"
+},
+{
+    "role":"paidUser",
+    "username":"IPaid",
+    "password":"ImNotfree",
+    "email": "paid@email.com",
+    "birthday":"02-03-1999",
+    "zipCode":"12345"
+},
+{
+    "role":"freeUser",
+    "username":"IWasFree",
+    "password":"totallyfree",
+    "email": "free@email.com",
+    "birthday":"03-04-1980",
+    "zipCode":"45678"
+}
+]

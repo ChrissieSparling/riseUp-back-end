@@ -1,0 +1,22 @@
+[
+    {
+        "body":"Test Comment",
+        "postId":"3"
+    },
+    {
+        "body":"Test Comment 2",
+        "postId":"1"
+    },
+    {
+        "body":"Test Comment 3",
+        "postId":"1"
+    },
+    {
+        "body":"Test Comment 4",
+        "postId":"5"
+    },
+    {
+        "body":"Test Comment 5",
+        "postId":"4"
+    }
+]
