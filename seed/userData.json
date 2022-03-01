@@ -1,6 +1,8 @@
 [
 {
     "role":"admin",
+    "firstName":"Susie",
+    "lastName":"Cue",
     "username":"AdminOne",
     "password":"AdminOne",
     "email": "admin@email.com",
@@ -9,6 +11,8 @@
 },
 {
     "role":"paidUser",
+    "firstName":"Lin",
+    "lastName":"Lee",
     "username":"IPaid",
     "password":"ImNotfree",
     "email": "paid@email.com",
@@ -17,6 +21,8 @@
 },
 {
     "role":"freeUser",
+    "firstName":"Jeremy",
+    "lastName":"Jarlsberg",
     "username":"IWasFree",
     "password":"totallyfree",
     "email": "free@email.com",
