@@ -1,19 +1,23 @@
 
 //I have commented out all of the AccessControl stuff for the moment: I'm still 
 //working on modularizing it so we don't have to have it in every routes folder.
-
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
-const withAuth = require('../../utils/auth')
+const jwt = require("jsonwebtoken");
+const { hasAccess, verifyToken } = require('../../middlewares/authJWT');
+const {User, Post, Comment} = require('../../models/');
 
-// const ac = require('../../roles')
+router.use(function(req, res, next) {
+    res.header(
+        "Access-Control-Allow-Headers",
+        "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+});
 
 //get all users (admin role only)
-router.get('/', withAuth, async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
-        // const role = req.session.role
-        // const permission = ac.can(role).readAny('user');
-        // if(permission.granted){
+        if(hasAccess(req.role, 'readAny', 'user')){
             const userData = await User.findAll({
                 include: [Post, Comment]
             });
@@ -22,19 +26,18 @@ router.get('/', withAuth, async (req, res) => {
             } else {
                 res.status(200).json(userData);
             }
-        //  } else {
-        //      res.status(403).json({message: 'User not authorized for this action.'})
-        //  }
+         } else {
+             res.status(403).json({message: 'User not authorized for this action.'})
+         }
     } catch (err) {
         res.status(500).json({message:`There was an error: ${err}`});
     }
 });
 
 //get user by id (anyone can get their own user, only admin can ger ANY user)
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', verifyToken, async (req, res) => {
     try {
-        // const role = req.session.role
-        // const permission = ac.can(role).readAny('user');
+        if((req.userId===req.params.id)||(hasAccess(req.role, 'readAny', 'user'))){
         const getUser = async () => {
             const userData = await User.findByPk(req.params.id, {
                 include: [Post, Comment],
@@ -45,17 +48,10 @@ router.get('/:id', withAuth, async (req, res) => {
                     res.status(200).json(userData);
                 }
         }
-        // console.log('session id:', req.session.userId);
-        // console.log(typeof req.session.userId)
-        // console.log(typeof req.params.id)
-        // console.log(req.session.userId===parseInt(req.params.id))
-        // if(req.session.userId===parseInt(req.params.id)){
             getUser();
-        // } else if (permission.granted){
-            // getUser();
-        // } else {
-        //     res.status(403).json({message: 'User not authorized for this action.'})
-        // }
+        } else {
+            res.status(403).json({message: 'User not authorized for this action.'})
+        }
     } catch (err) {
     res.status(500).json({message:`There was an error: ${err}`});
     }
@@ -74,25 +70,26 @@ router.post('/new', async (req, res) => {
     //zipCode:
     try {
         const newUser = await User.create({...req.body});
-
-        req.session.save(() => {
-        req.session.userId = newUser.id;
-        req.session.username = newUser.username;
-        req.session.role = newUser.role;
-        req.session.loggedIn = true;
-
-        res.status(200).json(newUser);
+        if(newUser){
+        const token = jwt.sign({id: user.id, role:user.role}, process.env.SECRET_KEY, {
+            expiresIn: process.env.TOKEN_MAX_AGE
         });
+            res.status(200).json({
+                id: newUser.id,
+                username: newUser.username,
+                role: newUser.role,
+                auth: true,
+                accessToken: token
+            })
+        } else {res.status(400).json({message: 'Not all required data was recieved!'})}
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
   //edit user: anyone can edit their OWN user obj (except their ID), but only an admin can edit ANY user object (like change their role: this can be limited access)
-  router.put('/:id', withAuth, async (req, res) => {
+  router.put('/:id', verifyToken, async (req, res) => {
     try {
-        // const role = req.session.role
-        // const permission = ac.can(role).updateAny('user');
         const updateUser = async () => {
             const user = await User.update(req.body, {
                 where: {
@@ -106,10 +103,8 @@ router.post('/new', async (req, res) => {
                 res.status(404).json({message: `That user not found!`});
             }
         } 
-        if(req.session.userId===req.params.id){
+        if((req.userId===req.params.id)||(hasAccess(req.role, 'updateAny', 'user'))){
             updateUser();
-        // } else if (permission.granted){
-        //     updateUser();
         } else {
             res.status(403).json({message: 'User not authorized for this action.'})
         }
@@ -119,10 +114,8 @@ router.post('/new', async (req, res) => {
   });
 
 //delete user account: any user can delete their own user, only admin can delete ANY account (we can assign what actually happens when we send a "delete" request: this should probably just deactivate the person's account and archive it)
-router.delete('/:id', withAuth, async (req, res)=>{
+router.delete('/:id', verifyToken, async (req, res)=>{
     try {
-        // const role = req.session.role
-        // const permission = ac.can(role).deleteAny('user');
         const deleteUser = () => {
             const user = User.destroy({
             where: {
@@ -136,10 +129,8 @@ router.delete('/:id', withAuth, async (req, res)=>{
             res.status(404).json({message: `No user with that ID found!`});
             }
         }
-        if(req.session.userId===req.params.id){
+        if((req.userId===req.params.id)||(hasAccess(req.role, 'deleteAny', 'user'))){
             deleteUser();
-        // } else if (permission.granted){
-        //     deleteUser();
         } else {
             res.status(403).json({message: 'User not authorized for this action.'})
         }
@@ -151,50 +142,54 @@ router.delete('/:id', withAuth, async (req, res)=>{
 //login
 router.post('/login', async (req, res) => {
     try {
+        console.log("req.body", req.body)
         const user = await User.findOne({
-        where: {
-            username: req.body.username,
-        },
-        });
-
-        if (!user) {
-        res.status(400).json({ message: 'check your username or password!' });
-        return;
-        }
-
+            where: {
+                username: req.body.username,
+            },
+            });
+            console.log('============user===========', user)
         const validPassword = user.checkPassword(req.body.password);
+        if (!user) {
+            res.status(400).json({ message: 'check your username or password!' });
+            return;
+        } else if (!validPassword) {
+            res.status(400).send({ 
+                accessToken: null,
+                message: 'check your username or password!' 
+            });
+        } else {
+            const token = jwt.sign({id: user.id, role:user.role}, process.env.SECRET_KEY, {
+                expiresIn: process.env.TOKEN_MAX_AGE
+            });
 
-        if (!validPassword) {
-        res.status(400).json({ message: 'check your username or password!' });
-        return;
+            res.status(200).json({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                role: user.role,
+                auth: true,
+                accessToken: token
+            })
         }
-
-        req.session.save(() => {
-        req.session.userId = user.id;
-        req.session.username = user.username;
-        req.session.role = user.role;
-        req.session.loggedIn = true;
-
-        res.json({ user, message: 'You are now logged in!' });
-        });
     } catch (err) {
         res.status(500).json({ message: `there was a problem: ${err}` });
     }
 })
 
-//logout
-router.post('/logout', (req, res) => {
-    try{
-        if (req.session.loggedIn) {
-        req.session.destroy(() => {
-            res.status(204).json({message: `User successfully logged out!`});
-        });
-        } else {
-        res.status(404).json({message:'User already logged out'}).end();
-        }
-    } catch (err) {
-        res.status(500).json({message: `there was an error: ${err}`})
-    }
-});
+//logout       NEED TO CONVERT FOR JWT
+// router.post('/logout', (req, res) => {
+//     try{
+//         if (req.session.loggedIn) {
+//         req.session.destroy(() => {
+//             res.status(204).json({message: `User successfully logged out!`});
+//         });
+//         } else {
+//         res.status(404).json({message:'User already logged out'}).end();
+//         }
+//     } catch (err) {
+//         res.status(500).json({message: `there was an error: ${err}`})
+//     }
+// });
 
 module.exports = router;
