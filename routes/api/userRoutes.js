@@ -71,7 +71,7 @@ router.post('/new', async (req, res) => {
     try {
         const newUser = await User.create({...req.body});
         if(newUser){
-        const token = jwt.sign({id: user.id, role:user.role}, process.env.SECRET_KEY, {
+        const token = jwt.sign({id: newUser.id, role:newUser.role}, process.env.SECRET_KEY, {
             expiresIn: process.env.TOKEN_MAX_AGE
         });
             res.status(200).json({
