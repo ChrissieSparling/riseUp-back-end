@@ -31,9 +31,16 @@ User.hasMany(Comment, {
   foreignKey: 'userId',
   onDelete: 'SET NULL'
 });
+// need to add belongs to and has many for Motivation, Inspiration, Affirmation, Philosophy, Quote
+
 
 module.exports = {
   User,
   Comment,
-  Post
+  Post,
+  Inspiration,
+  Motivation,
+  Philosophy,
+  Affirmation,
+  Quote,
 };
