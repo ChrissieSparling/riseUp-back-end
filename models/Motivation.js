@@ -13,7 +13,7 @@ Motivation.init(
           },
           // allowNull:false
         },
-        author_name: {
+        authorName: {
             type: DataTypes.STRING,
             allowNull:false
           },

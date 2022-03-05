@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { User, Philosophy } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const  require('../../utils/auth');
 // riseUp.com/userId(can post)/Philosophys (point you can get all Philosophys)/PhilosophyId(find any Philosophy by its id, update an Philosophy, or delete an Philosophy)
 
 // general get request to GET all Philosophy.
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).readAny('post');
@@ -28,7 +28,7 @@ router.get('/', withAuth, async (req, res) => {
     }
   });
 // get one Philosophy by id.
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const postPhilosophy = await Philosophy.findByPk(req.params.id, {
         include: [User],
@@ -42,7 +42,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // post Philosophy
-router.post('/new', withAuth, async (req, res) => {
+router.post('/new', async (req, res) => {
     //need:
     //topic
     //title
@@ -57,7 +57,7 @@ router.post('/new', withAuth, async (req, res) => {
 });
 
 // update Philosophy
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).updateAny('post');
@@ -86,7 +86,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // delete Philosophy
-router.delete('/:id', withAuth, async (req, res)=>{
+router.delete('/:id', async (req, res)=>{
     try {
         const philosophyDelete = Philosophy.destroy({
         where: {
@@ -105,4 +105,5 @@ router.delete('/:id', withAuth, async (req, res)=>{
 });
 
 module.exports = router;
+// delete with auth for now may have to put back in later cs
 

@@ -13,14 +13,19 @@ Inspiration.init(
           },
           // allowNull:false
         },
-        author_name: {
+        authorName: {
             type: DataTypes.STRING,
             allowNull:false
+          },
+          image:{
+            type: DataTypes.STRING,
+            allownull: false,
           },
         body: {
           type: DataTypes.STRING,
           allowNull:false
         },
+
         createdAt: {
           type: DataTypes.DATEONLY,
           allowNull:false,

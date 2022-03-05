@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { User, Affirmation } = require('../../models');
-const withAuth = require('../../utils/auth');
+// cons = require('../../utils/auth');
 // riseUp.com/userId(can post)/Affirmations (point you can get all Affirmations)/AffirmationId(find any Affirmation by its id, update an Affirmation, or delete an Affirmation)
 
 // general get request to GET all Affirmation.
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).readAny('post');
@@ -28,7 +28,7 @@ router.get('/', withAuth, async (req, res) => {
     }
   });
 // get one Affirmation by id.
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const postAffirmation = await Affirmation.findByPk(req.params.id, {
         include: [User],
@@ -41,15 +41,16 @@ router.get('/:id', withAuth, async (req, res) => {
     }
 });
 
-// post Affirmation
-router.post('/new', withAuth, async (req, res) => {
+// post Affirmation changed from /new to / 
+router.post('/', async (req, res) => {
     //need:
     //topic
     //title
     //body
     const body = req.body;
     try {
-        const newPostAffirmation = await Affirmation.create({ ...body, userId: req.session.userId });
+        // removed userId: req.session.userId  from after ...body to try to get working may need to add back in
+        const newPostAffirmation = await Affirmation.create({ ...body });
         res.status(200).json(newPostAffirmation);
     } catch (err) {
         res.status(500).json({message: `There was an error: ${err}`});
@@ -57,7 +58,7 @@ router.post('/new', withAuth, async (req, res) => {
 });
 
 // update Affirmation
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).updateAny('post');
@@ -86,7 +87,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // delete Affirmation
-router.delete('/:id', withAuth, async (req, res)=>{
+router.delete('/:id', async (req, res)=>{
     try {
         const affirmationDelete = Affirmation.destroy({
         where: {
@@ -105,4 +106,6 @@ router.delete('/:id', withAuth, async (req, res)=>{
 });
 
 module.exports = router;
+
+// delete with auth for now may have to put back in later cs
 

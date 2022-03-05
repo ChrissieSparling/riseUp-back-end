@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { User, Motivation } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const= require('../../utils/auth');
 // riseUp.com/userId(can post)/Motivations (point you can get all Motivations)/MotivationId(find any Motivation by its id, update an Motivation, or delete an Motivation)
 
 // general get request to GET all Motivation.
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).readAny('post');
@@ -28,7 +28,7 @@ router.get('/', withAuth, async (req, res) => {
     }
   });
 // get one Motivation by id.
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const postMotivation = await Motivation.findByPk(req.params.id, {
         include: [User],
@@ -42,7 +42,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // post Motivation
-router.post('/new', withAuth, async (req, res) => {
+router.post('/new', async (req, res) => {
     //need:
     //topic
     //title
@@ -57,7 +57,7 @@ router.post('/new', withAuth, async (req, res) => {
 });
 
 // update Motivation
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).updateAny('post');
@@ -86,7 +86,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // delete Motivation
-router.delete('/:id', withAuth, async (req, res)=>{
+router.delete('/:id', async (req, res)=>{
     try {
         const motivationDelete = Motivation.destroy({
         where: {
@@ -105,4 +105,5 @@ router.delete('/:id', withAuth, async (req, res)=>{
 });
 
 module.exports = router;
+// delete with auth for now may have to put back in later cs
 

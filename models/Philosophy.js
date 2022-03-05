@@ -13,12 +13,20 @@ Philosophy.init(
       },
       // allowNull:false
     },
-    author_name: {
+    authorName: {
         type: DataTypes.STRING,
         allowNull:false
       },
     body: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING (255),
+      allowNull:false
+    },
+    moral:{
+      type: DataTypes.STRING (255),
+      allowNull:false
+    },
+    birdWalk:{
+      type: DataTypes.STRING (255),
       allowNull:false
     },
     createdAt: {

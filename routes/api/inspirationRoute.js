@@ -1,11 +1,11 @@
 
 const router = require('express').Router();
 const { User, Inspiration } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const  = require('../../utils/auth');
 // riseUp.com/userId(can post)/inspirations (point you can get all inspirations)/inspirationId(find any inspiration by its id, update an inspiration, or delete an inspiration)
 
 // general get request to GET all inspiration.
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).readAny('post');
@@ -29,7 +29,7 @@ router.get('/', withAuth, async (req, res) => {
     }
   });
 // get one inspiration by id.
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const postInspiration = await Inspiration.findByPk(req.params.id, {
         include: [User],
@@ -42,8 +42,8 @@ router.get('/:id', withAuth, async (req, res) => {
     }
 });
 
-// post inspiration
-router.post('/new', withAuth, async (req, res) => {
+// post inspiration decide if we want /new or / because this is not working with /new
+router.post('/new', async (req, res) => {
     //need:
     //topic
     //title
@@ -58,7 +58,7 @@ router.post('/new', withAuth, async (req, res) => {
 });
 
 // update inspiration
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         // const role = req.session.role;
         // const permission = ac.can(role).updateAny('post');
@@ -87,7 +87,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // delete inspiration
-router.delete('/:id', withAuth, async (req, res)=>{
+router.delete('/:id', async (req, res)=>{
     try {
         const inspirationDelete = Inspiration.destroy({
         where: {
@@ -106,4 +106,5 @@ router.delete('/:id', withAuth, async (req, res)=>{
 });
 
 module.exports = router;
+// delete with auth for now may have to put back in later cs
 
