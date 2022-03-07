@@ -10,11 +10,13 @@ const {User, Post, Comment} = require('../../models/');
 router.get('/', verifyToken, async (req, res) => {
     try {
             const postData = await Post.findAll({
-                include: [User, Comment],
+                // include: [User, Comment],
             });
             if(postData.length===0){
+                console.log('no posts found!!')
                 res.status(404).json({message: 'No posts found!'})
             } else {
+                console.log('=========postData', postData)
                 res.status(200).json(postData);
             }        
     } catch (err) {
@@ -80,7 +82,7 @@ router.post('/:postId/comments/new', verifyToken, async (req, res)=>{
     try {
         if(hasAccess(req.role, 'createOwn', 'comment')){
             const body = req.body;
-            const newComment = await Comment.create({ ...body, userId: req.session.userId, postId: req.params.postId });
+            const newComment = await Comment.create({ ...body, userId: req.userId, postId: req.params.postId });
             res.status(200).json(newComment);
         } else {
             res.status(401).json({message: 'This feature is for subscribers only'})

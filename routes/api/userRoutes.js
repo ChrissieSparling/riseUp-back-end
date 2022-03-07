@@ -19,7 +19,7 @@ router.get('/', verifyToken, async (req, res) => {
     try {
         if(hasAccess(req.role, 'readAny', 'user')){
             const userData = await User.findAll({
-                include: [Post, Comment]
+                // include: [Post, Comment]
             });
             if(!userData){
                 res.status(404).json({message: 'No users found!'})
@@ -37,10 +37,11 @@ router.get('/', verifyToken, async (req, res) => {
 //get user by id (anyone can get their own user, only admin can ger ANY user)
 router.get('/:id', verifyToken, async (req, res) => {
     try {
+        console.log(req.userId)
         if((req.userId===req.params.id)||(hasAccess(req.role, 'readAny', 'user'))){
         const getUser = async () => {
             const userData = await User.findByPk(req.params.id, {
-                include: [Post, Comment],
+                // include: [Post, Comment],
                 });
                 if(!userData){
                     res.status(404).json({message: 'No users found!'})
@@ -77,8 +78,8 @@ router.post('/new', async (req, res) => {
             res.status(200).json({
                 id: newUser.id,
                 username: newUser.username,
-                role: newUser.role,
-                auth: true,
+                // role: newUser.role,
+                // auth: true,
                 accessToken: token
             })
         } else {res.status(400).json({message: 'Not all required data was recieved!'})}
@@ -165,10 +166,10 @@ router.post('/login', async (req, res) => {
 
             res.status(200).json({
                 id: user.id,
-                username: user.username,
-                email: user.email,
-                role: user.role,
-                auth: true,
+                // username: user.username,
+                // email: user.email,
+                // role: user.role,
+                // auth: true,
                 accessToken: token
             })
         }

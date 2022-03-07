@@ -10,6 +10,16 @@
     "zipCode":"98765"
 },
 {
+    "role":"mod",
+    "firstName":"Gabriela",
+    "lastName":"Cortez",
+    "username":"ModOne",
+    "password":"ModOne",
+    "email": "mod@email.com",
+    "birthday":"03-03-2001",
+    "zipCode":"98765"
+},
+{
     "role":"paidUser",
     "firstName":"Lin",
     "lastName":"Lee",
