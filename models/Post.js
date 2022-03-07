@@ -14,7 +14,8 @@ Post.init(
       allowNull: false
     },
     userId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
+      // CHANGE BACK TO UUID WHEN DONE? DOESN'T WORK WITH UUID RIGHT NOW
       // allowNull:false
     },
     body: {

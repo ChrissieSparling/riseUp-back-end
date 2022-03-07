@@ -18,7 +18,8 @@ Comment.init(
       allowNull: false
     },
     userId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
+      // CHANGED THE UUID TO INTEGER FOR NOW
       // allowNull: false
     }
   },
