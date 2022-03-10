@@ -13,6 +13,10 @@ Inspiration.init(
           },
           // allowNull:false
         },
+       topic: {
+          type: DataTypes.STRING,
+          allowNull:false
+        },
         authorName: {
             type: DataTypes.STRING,
             allowNull:false

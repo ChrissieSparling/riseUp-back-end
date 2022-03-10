@@ -1,183 +1,213 @@
 [
-    {   "userId": 1,
+    {   
+        "topic": "Personal Wellness",
         "authorName":"Sal D",
         "body": "I am the architect of my life; I build its foundation and choose its contents.",
         "images": "/images/beauty1.jpg"
 
     },
     {   
-        "userId": 2,
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I will become the best version of me.",
         "images": "/images/bestMe.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am walking in the truth of who I am",
         "images": "/images/walkingInTruth.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am comfortable declaring my own worth.",
         "images": "/images/beauty2.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am amazing!",
         "images": "/images/yourAmazing.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am now filled with faith, certainty, and confidence. I now create and feel these emotions in my body",
         "images": "/images/confidence.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I have the power to live my dreams",
         "images": "/images/motivation.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am unshakable in any storm.",
         "images": "/images/lightinstorm.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I act with courage and confidence ",
         "images": "/images/confidence1.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Crisis Recovery and Grieving",
+        "authorName":"America's Mom",
         "body": "I am a survivor and proud of my scars.",
         "images": "/images/scars.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am releasing old limiting beliefs about myself.",
         "images": "/images/rainbow.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am learning to step out of my comfort zone.",
         "images": "/images/walkingInTruth"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Crisis Recovery and Grieving",
+        "authorName":"America's Mom",
         "body": "I am letting go more and more every day.",
         "images": "/images/beauty5.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Crisis Recovery and Grieving",
+        "authorName":"America's Mom",
         "body": "I am releasing all attachment to past hurts.",
         "images": "/images/beauty3.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am capable of thriving in any situation.",
         "images": "/images/inspiration5.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am always served well by my inner wisdom.",
         "images": "/images/inspiration5.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am free of resentment.",
         "images": "/images/motivation.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am letting go of expectations and enjoying my journey.",
         "images": "/images/motivation1.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am releasing yesterday so that I can be fully present today.",
         "images": "/images/confidence.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
-        "body": "I am welcoming the serenity of being free of emotional burdens.",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
+        "body": "I am welcoming serenity so I can be free of emotional burdens.",
         "images": "/images/confidence.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am at peace with my past.",
         "images": "/images/motivation.jpg"
 
     },
-    {   
-        "authorName":"Chrissie Sparling",
+    {  
+        "topic": "Personal Wellness", 
+        "authorName":"America's Mom",
         "body": "I am a unique individual with unlimited potential.",
         "images": "/images/inspiration1.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Financial",
+        "authorName":"America's Mom",
         "body": "I am worthy of overwhelming success.",
         "images": "/images/beauty2.jpg"
 
     },
 
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am meeting new people everyday that help me learn and grow.",
         "images": "/images/helping.jpg"
 
-    },{ 
-        "authorName":"Chrissie Sparling",  
+    },
+    { 
+        "topic": "Work",
+        "authorName":"America's Mom",  
         "body": "I am inspired, motivated, and determined to succeed.",
         "images": "/images/inpsiration5.png"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am discovering all the ideas and solutions I need.",
         "images": "/images/beauty3.jpg"
 
     },
 
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Work",
+        "authorName":"America's Mom",
         "body": "I am enjoying challenges that lead to even greater success.",
         "images": "/images/confidence1.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am creating a lifestyle that I love.",
         "images": "/images/inspiration1.jpg"
 
     },
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am grateful for the gift of being alive today.",
         "images": "/images/inspiration.jpg"
 
     },
 
     {   
-        "authorName":"Chrissie Sparling",
+        "topic": "Personal Wellness",
+        "authorName":"America's Mom",
         "body": "I am passionate about expressing gratitude to share my joy.",
         "images": "/images/beauty1.jpg"
 

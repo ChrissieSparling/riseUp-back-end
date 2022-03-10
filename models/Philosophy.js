@@ -22,12 +22,13 @@ Philosophy.init(
       allowNull:false
     },
     moral:{
-      type: DataTypes.STRING (255),
+      type: DataTypes.TEXT,
       allowNull:false
     },
     birdWalk:{
-      type: DataTypes.STRING (255),
-      allowNull:false
+      type: DataTypes.TEXT,
+      allowNull:false,
+      defaultValue: ""
     },
     createdAt: {
       type: DataTypes.DATEONLY,
