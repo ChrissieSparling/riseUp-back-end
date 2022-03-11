@@ -17,16 +17,6 @@ const seedDatabase = async () => {
         individualHooks: true,
         returning: true,
     });
-
-    // await Post.bulkCreate(postData, {
-    //     individualHooks: true,
-    //     returning: true,
-    // });
-
-    // await Comment.bulkCreate(commentData, {
-    //     individualHooks: true,
-    //     returning: true,
-    // });
     // added for positive apis
      await Affirmation.bulkCreate(affirmationData, {
         individualHooks: true,

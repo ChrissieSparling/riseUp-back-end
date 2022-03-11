@@ -23,20 +23,10 @@
     "role":"paidUser",
     "firstName":"Lin",
     "lastName":"Lee",
-    "username":"IPaid",
-    "password":"ImNotfree",
+    "username":"User123",
+    "password":"User123",
     "email": "paid@email.com",
     "birthday":"02-03-1999",
     "zipCode":"12345"
-},
-{
-    "role":"freeUser",
-    "firstName":"Jeremy",
-    "lastName":"Jarlsberg",
-    "username":"IWasFree",
-    "password":"totallyfree",
-    "email": "free@email.com",
-    "birthday":"03-04-1980",
-    "zipCode":"45678"
 }
 ]
