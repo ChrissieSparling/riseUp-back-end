@@ -5,12 +5,12 @@ const ac = new AccessControl();
 
 ////the different "roles" in our db model are defined and permissed here
 ac.grant('freeUser')
-    .createOwn('user', ['*', '!id'])
-    .readOwn('user', ['*', '!id'])
-    .updateOwn('user', ['*', '!id'])
+    .createOwn('user', ['*'])
+    .readOwn('user', ['*'])
+    .updateOwn('user', ['*'])
     .deleteOwn('user')
-    .readAny('post', ['*', '!id'])
-    .readAny('comment', ['*', '!id'])
+    .readAny('post', ['*'])
+    .readAny('comment', ['*'])
 
 ac.grant('paidUser')
     .extend('freeUser')
@@ -57,7 +57,7 @@ const verifyToken = (req, res, next) => {
     }
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         if (err) {
-            return res.status(401).json({auth: false,
+            return res.status(403).json({auth: false,
             message: "Please login to view."
             });
         } else {

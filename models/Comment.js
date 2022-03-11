@@ -13,6 +13,10 @@ Comment.init(
         type: DataTypes.DATEONLY,
         defaultValue: Sequelize.NOW()
     },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false

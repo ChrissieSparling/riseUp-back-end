@@ -1,5 +1,4 @@
 
-//I have commented out all of the AccessControl stuff for the moment: I'm still working on modularizing it so we don't have to have it in every routes folder.//
 
 const router = require('express').Router();
 const { hasAccess, verifyToken } = require('../../middlewares/authJWT');

@@ -7,20 +7,22 @@ const {User, Post, Comment} = require('../../models/');
 
 
 //get all posts: these will be rendered on the forum page (filtered by topic?) All users can read all posts
-router.get('/', verifyToken, async (req, res) => {
-    try {
-            const postData = await Post.findAll({
-                include: [User, Comment],
-            });
-            if(postData.length===0){
-                res.status(404).json({message: 'No posts found!'})
-            } else {
-                res.status(200).json(postData);
-            }        
-    } catch (err) {
-        res.status(500).json({message:`There was an error: ${err}`});
-    }
-  });
+// router.get('/', verifyToken, async (req, res) => {
+//     try {
+//             const postData = await Post.findAll({
+//                 // include: [User, Comment],
+//             });
+//             if(postData.length===0){
+//                 console.log('no posts found!!')
+//                 res.status(404).json({message: 'No posts found!'})
+//             } else {
+//                 console.log('=========postData', postData)
+//                 res.status(200).json(postData);
+//             }        
+//     } catch (err) {
+//         res.status(500).json({message:`There was an error: ${err}`});
+//     }
+//   });
 
 //get post by id: these will render on the individual post cards if the user clicks on a forum card. The user will write comments on the individual post card. All users can read a post by id
 router.get('/:id', verifyToken, async (req, res) => {
@@ -35,6 +37,26 @@ router.get('/:id', verifyToken, async (req, res) => {
     res.status(500).json({message:`There was an error: ${err}`});
     }
 });
+
+
+router.get('/forum/:topic', verifyToken, async (req, res) => {
+    try {   
+            console.log(req.params.topic)
+            const postData = await Post.findAll({
+                where: {topic: req.params.topic},
+                include: [User, Comment],
+            });
+            if(postData.length===0){
+                console.log('no posts found!!')
+                res.status(404).json({message: 'No posts found!'})
+            } else {
+                console.log('=========postData', postData)
+                res.status(200).json(postData);
+            }        
+    } catch (err) {
+        res.status(500).json({message:`There was an error: ${err}`});
+    }
+  });
 
 //get all comments for a particular post: this probably only needs to be available to mod and admin: no one else just needs a list of all the comments
 router.get('/:postId/comments', verifyToken, async (req, res) => {
@@ -60,6 +82,7 @@ router.post('/new', verifyToken, async (req, res) => {
     //title
     //body
     try {
+        console.log('You requested to create a new post')
         if(hasAccess(req.role, 'createOwn', 'post')){
             const body = req.body;
             const newPost = await Post.create({ ...body, userId: req.userId });
@@ -80,7 +103,7 @@ router.post('/:postId/comments/new', verifyToken, async (req, res)=>{
     try {
         if(hasAccess(req.role, 'createOwn', 'comment')){
             const body = req.body;
-            const newComment = await Comment.create({ ...body, userId: req.session.userId, postId: req.params.postId });
+            const newComment = await Comment.create({ ...body, userId: req.userId, postId: req.params.postId });
             res.status(200).json(newComment);
         } else {
             res.status(401).json({message: 'This feature is for subscribers only'})
@@ -93,7 +116,11 @@ router.post('/:postId/comments/new', verifyToken, async (req, res)=>{
 //edit post: this will be requested onclick from the edit post form. Any paid user can edit their OWN post. NO ONE can edit other users' posts.
 router.put('/:id', verifyToken, async (req, res) => {
     try {
+        console.log('this is the put request',req.params.id)
         const matchPost = await Post.findByPk(req.params.id)
+        console.log('are they equal ?', matchPost.userId===req.userId)
+        console.log('are they equal if the right ones a num?', matchPost.userId===parseInt(req.userId))
+        console.log('are they equal if the left ones a num ?', parseInt(matchPost.userId)===req.userId)
         const editPost = async () => {
             const post = await Post.update(req.body, {
                 where: {
@@ -106,6 +133,9 @@ router.put('/:id', verifyToken, async (req, res) => {
                 res.status(404).json({message: `That post not found!`}).end();
             }
         }
+        console.log('are they equal ?', matchPost.userId===req.userId)
+        console.log('are they equal if the right ones a num?', matchPost.userId===parseInt(req.userId))
+        console.log('are they equal if the left ones a num ?', parseInt(matchPost.userId)===req.userId)
         if(matchPost.userId===req.userId){
             editPost();
         } else {
