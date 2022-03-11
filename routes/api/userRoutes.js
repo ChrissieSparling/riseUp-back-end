@@ -14,6 +14,19 @@ router.use(function(req, res, next) {
     next();
 });
 
+router.get("/gettokendata", verifyToken, (req, res) => {
+    console.log('req.headers', req.headers);
+    console.log('req.userId', req.userId);
+    console.log('req.role', req.role);
+    res.status(200).json({
+        userId: req.userId,
+        role: req.role
+    })
+
+
+  
+  });
+
 //get all users (admin role only)
 router.get('/', verifyToken, async (req, res) => {
     try {
@@ -37,11 +50,12 @@ router.get('/', verifyToken, async (req, res) => {
 //get user by id (anyone can get their own user, only admin can ger ANY user)
 router.get('/:id', verifyToken, async (req, res) => {
     try {
-        console.log(req.userId)
-        if((req.userId===req.params.id)||(hasAccess(req.role, 'readAny', 'user'))){
+        // console.log('are they equal?',req.userId===parseInt(req.params.id))
+        // console.log(req.role)
+        if((req.userId===parseInt(req.params.id))||(hasAccess(req.role, 'readAny', 'user'))){
         const getUser = async () => {
             const userData = await User.findByPk(req.params.id, {
-                // include: [Post, Comment],
+                include: [Post, Comment],
                 });
                 if(!userData){
                     res.status(404).json({message: 'No users found!'})
@@ -72,7 +86,7 @@ router.post('/new', async (req, res) => {
     try {
         const newUser = await User.create({...req.body});
         if(newUser){
-        const token = jwt.sign({id: newUser.id, role:newUser.role}, process.env.SECRET_KEY, {
+        const token = jwt.sign({id: newUser.id, role:newUser.role, username: newUser.username}, process.env.SECRET_KEY, {
             expiresIn: process.env.TOKEN_MAX_AGE
         });
             res.status(200).json({
@@ -166,7 +180,7 @@ router.post('/login', async (req, res) => {
 
             res.status(200).json({
                 id: user.id,
-                // username: user.username,
+                username: user.username,
                 // email: user.email,
                 // role: user.role,
                 // auth: true,

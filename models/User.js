@@ -65,7 +65,15 @@ User.init(
       validate: {
         is: /^\d{5}(?:[- ]?\d{4})?$/
       }
-    }
+    },
+    agreeTS: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    // quotes: {
+
+    // }
   },
   {
     hooks: {
