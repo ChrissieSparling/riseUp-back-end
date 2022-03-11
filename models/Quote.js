@@ -13,6 +13,10 @@ Quote.init(
           },
           // allowNull:false
         },
+        topic: {
+          type: DataTypes.STRING,
+          allowNull:false
+        },
         author_name: {
             type: DataTypes.STRING,
             allowNull:false
