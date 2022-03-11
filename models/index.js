@@ -5,7 +5,7 @@ const Affirmation = require('./Affirmation');
 const Motivation = require('./Motivation');
 const Inspiration = require('./Inspiration');
 const Philosophy = require('./Philosophy');
-// const Quote = require('./Quote');
+const Quote = require('./Quote');
 
 Post.belongsTo(User, {
   foreignKey: 'userId',
@@ -90,15 +90,15 @@ User.belongsToMany(Philosophy, {through: 'UserPhilosophy'});
 //   onDelete: 'CASCADE'
 // });
 
-// Quote.belongsTo(User, {
-//   foreignKey: 'userId',
-//   onDelete: 'CASCADE'
-// });
+Quote.belongsTo(User, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE'
+});
 
-// User.hasMany(Quote, {
-//   foreignKey: 'userId',
-//   onDelete: 'CASCADE'
-// });
+User.hasMany(Quote, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE'
+});
 
 module.exports = {
   User,
@@ -108,5 +108,5 @@ module.exports = {
   Motivation,
   Philosophy,
   Affirmation,
-  // Quote,
+  Quote,
 };

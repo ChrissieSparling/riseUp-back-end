@@ -17,12 +17,12 @@ Quote.init(
           type: DataTypes.STRING,
           allowNull:false
         },
-        author_name: {
+        authorName: {
             type: DataTypes.STRING,
             allowNull:false
           },
         body: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull:false
         },
         createdAt: {
