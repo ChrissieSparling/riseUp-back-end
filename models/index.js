@@ -38,45 +38,57 @@ User.hasMany(Comment, {
 });
 // cs added Motivation, Inspiration, Affirmation, Philosophy, Quote
 
-Affirmation.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+Affirmation.belongsToMany(User, {through: 'UserAffirmation'});
+User.belongsToMany(Affirmation, {through: 'UserAffirmation'});
 
-User.hasMany(Affirmation, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+Motivation.belongsToMany(User, {through: 'UserMotivation'});
+User.belongsToMany(Motivation, {through: 'UserMotivation'});
 
-Motivation.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+Inspiration.belongsToMany(User, {through: 'UserInspiration'});
+User.belongsToMany(Inspiration, {through: 'UserInspiration'});
 
-User.hasMany(Motivation, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+Philosophy.belongsToMany(User, {through: 'UserPhilosophy'});
+User.belongsToMany(Philosophy, {through: 'UserPhilosophy'});
 
-Inspiration.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+// Affirmation.belongsTo(User, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
 
-User.hasMany(Inspiration, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+// User.hasMany(Affirmation, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
 
-Philosophy.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+// Motivation.belongsTo(User, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
 
-User.hasMany(Philosophy, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
-});
+// User.hasMany(Motivation, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
+
+// Inspiration.belongsTo(User, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
+
+// User.hasMany(Inspiration, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
+
+// Philosophy.belongsTo(User, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
+
+// User.hasMany(Philosophy, {
+//   foreignKey: 'userId',
+//   onDelete: 'CASCADE'
+// });
 
 // Quote.belongsTo(User, {
 //   foreignKey: 'userId',

@@ -41,9 +41,9 @@ User.init(
     role: {
     type: DataTypes.STRING,
     allowNull: false,
-    // validate: {
-    //     isIn: ['admin', 'mod', 'freeUser', 'paidUser']
-    // }
+    validate: {
+      isIn: [['paidUser', 'mod', 'admin']]
+     }
     },
     email: {
       type: DataTypes.STRING,
@@ -70,10 +70,7 @@ User.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    },
-    // quotes: {
-
-    // }
+    }
   },
   {
     hooks: {
