@@ -1,8 +1,8 @@
 {
-  "name": "accesscontrol",
+  "name": "rise-up-back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "accessControl.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -11,17 +11,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
   "dependencies": {
     "accesscontrol": "^2.2.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
-    "connect-session-sequelize": "^7.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.17.0"
-  }
+  },
+  "engines": {
+    "node": "v16.13.2"
+}
 }
