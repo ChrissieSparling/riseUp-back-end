@@ -1,9 +1,7 @@
 const sequelize = require('../config/config');
-const { User, Post, Comment, Philosophy, Inspiration, Affirmation, Motivation, Quote } = require('../models');
+const { User, Philosophy, Inspiration, Affirmation, Motivation, Quote } = require('../models');
 
 const userData =  require('./userData.json');
-const postData = require('./postData.json');
-const commentData = require('./commentData.json');
 const affirmationData = require('./affirmationData.json');
 const inspirationData = require('./inspirationData.json');
 const motivationData = require('./motivationData.json');
