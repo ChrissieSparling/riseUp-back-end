@@ -30,6 +30,9 @@ Philosophy.init(
       allowNull:false,
       defaultValue: ""
     },
+    likeCount: {
+      type: DataTypes.INTEGER,
+    },
     createdAt: {
       type: DataTypes.DATEONLY,
       allowNull:false,

@@ -18,7 +18,9 @@ router.get("/gettokendata", verifyToken, (req, res) => {
     console.log('req.headers', req.headers);
     console.log('req.userId', req.userId);
     console.log('req.role', req.role);
+    console.log('req.username', req.username);
     res.status(200).json({
+        username: req.username,
         userId: req.userId,
         role: req.role
     })
@@ -92,7 +94,7 @@ router.post('/new', async (req, res) => {
             res.status(200).json({
                 id: newUser.id,
                 username: newUser.username,
-                // role: newUser.role,
+                role: newUser.role,
                 // auth: true,
                 accessToken: token
             })
@@ -174,15 +176,20 @@ router.post('/login', async (req, res) => {
                 message: 'check your username or password!' 
             });
         } else {
-            const token = jwt.sign({id: user.id, role:user.role}, process.env.SECRET_KEY, {
+            const token = jwt.sign({id: user.id, role:user.role, username: user.username}, process.env.SECRET_KEY, {
                 expiresIn: process.env.TOKEN_MAX_AGE
             });
+            // const cookie = req.cookies.token;
+
+            // if(cookie==undefined) {
+            //     res.cookie('token', token, {httpOnly: true})
+            // }
 
             res.status(200).json({
                 id: user.id,
                 username: user.username,
                 // email: user.email,
-                // role: user.role,
+                role: user.role,
                 // auth: true,
                 accessToken: token
             })

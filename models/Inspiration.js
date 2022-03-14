@@ -29,7 +29,9 @@ Inspiration.init(
           type: DataTypes.STRING,
           allowNull:false
         },
-
+        likeCount: {
+          type: DataTypes.INTEGER,
+        },
         createdAt: {
           type: DataTypes.DATEONLY,
           allowNull:false,
