@@ -61,8 +61,10 @@ const verifyToken = (req, res, next) => {
             message: "Please login to view."
             });
         } else {
+            console.log('decoded', decoded)
         req.userId = decoded.id;
         req.role = decoded.role;
+        req.username = decoded.username;
             
         next();
         }
