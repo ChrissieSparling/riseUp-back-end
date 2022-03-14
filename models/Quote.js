@@ -25,6 +25,9 @@ Quote.init(
           type: DataTypes.TEXT,
           allowNull:false
         },
+        likeCount: {
+          type: DataTypes.INTEGER,
+        },
         createdAt: {
           type: DataTypes.DATEONLY,
           allowNull:false,

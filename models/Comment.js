@@ -17,6 +17,9 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    likeCount: {
+      type: DataTypes.INTEGER,
+    },
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false

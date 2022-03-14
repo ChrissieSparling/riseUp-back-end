@@ -29,6 +29,9 @@ Affirmation.init(
           type: DataTypes.STRING,
           allownull: false,
         },
+        likeCount: {
+          type: DataTypes.INTEGER,
+        },
         createdAt: {
           type: DataTypes.DATEONLY,
           allowNull:true,
