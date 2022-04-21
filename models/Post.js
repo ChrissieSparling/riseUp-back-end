@@ -24,6 +24,11 @@ Post.init(
     },
     likeCount: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    flagged: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     createdAt: {
       type: DataTypes.DATEONLY,
