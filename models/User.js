@@ -41,8 +41,9 @@ User.init(
     role: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: 'user',
     validate: {
-      isIn: [['paidUser', 'mod', 'admin']]
+      isIn: [['user', 'mod', 'admin', 'troll']]
      }
     },
     email: {
@@ -60,17 +61,15 @@ User.init(
         isDate: true
       }
     },
-    zipCode: {
-      type: DataTypes.STRING,
-      validate: {
-        is: /^\d{5}(?:[- ]?\d{4})?$/
-      }
-    },
     agreeTS: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    }
+    },
+    flagged: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
   },
   {
     hooks: {
